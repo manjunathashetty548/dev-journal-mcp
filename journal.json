@@ -1,0 +1,123 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "text": "today I built a journal MCP server in Go",
+      "created_at": "2026-03-23 17:28"
+    },
+    {
+      "id": 2,
+      "text": "i learned about MCP",
+      "created_at": "2026-03-24 09:36"
+    },
+    {
+      "id": 3,
+      "text": "mcp",
+      "created_at": "2026-03-24 09:38"
+    },
+    {
+      "id": 4,
+      "text": "mcp is a bridge between tool and gpt",
+      "created_at": "2026-03-24 09:40"
+    },
+    {
+      "id": 5,
+      "text": "mcp is important in ai",
+      "created_at": "2026-03-24 09:40"
+    },
+    {
+      "id": 6,
+      "text": "mcp is a new tech introduced",
+      "created_at": "2026-03-24 10:24"
+    },
+    {
+      "id": 7,
+      "text": "hello",
+      "created_at": "2026-03-24 11:16"
+    },
+    {
+      "id": 8,
+      "text": "mcp is agreat tool",
+      "created_at": "2026-03-24 11:22"
+    },
+    {
+      "id": 9,
+      "text": "sahah",
+      "created_at": "2026-03-24 11:22"
+    },
+    {
+      "id": 10,
+      "text": "I learned Go today",
+      "created_at": "2026-03-24 11:50"
+    },
+    {
+      "id": 12,
+      "text": "json is lightweight s o i have used it today",
+      "created_at": "2026-03-24 11:52"
+    },
+    {
+      "id": 15,
+      "text": "i learned python basic today",
+      "created_at": "2026-03-24 11:55"
+    },
+    {
+      "id": 16,
+      "text": "i fixed bug in api today",
+      "created_at": "2026-03-24 12:13"
+    },
+    {
+      "id": 18,
+      "text": "f",
+      "created_at": "2026-03-24 17:07"
+    },
+    {
+      "id": 19,
+      "text": "learned go today",
+      "created_at": "2026-03-24 17:07"
+    },
+    {
+      "id": 21,
+      "text": "learnd python todat",
+      "created_at": "2026-03-24 17:08"
+    }
+  ],
+  "reports": [
+    {
+      "id": 11,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n**Work Done:**\n- Built a journal MCP server in Go.\n\n**Concepts Learned:**\n- MCP (Message Control Protocol) is a bridge between tools and GPT (Generative Pre-trained Transformer).\n- MCP is significant in the field of AI.\n- MCP is a new technology introduced recently.\n\n**Tools Used:**\n- Go programming language.\n\n**Summary:**\nToday was a productive day focused on learning and implementing MCP. I built a journal MCP server using Go, which involved understanding how MCP acts as a bridge between tools and GPT. This new technology is crucial in the AI domain, and I gained valuable insights into its importance and functionality. Additionally, I reinforced my skills in the Go programming language.",
+      "created_at": "2026-03-24 11:51"
+    },
+    {
+      "id": 13,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n#### Work Done\n- Built a journal MCP server in Go.\n\n#### Concepts Learned\n- Learned about MCP (Message Control Protocol) and its significance in AI.\n- Understood that MCP acts as a bridge between tools and GPT (Generative Pre-trained Transformer).\n- Recognized the importance of MCP in AI and its role as a new technology.\n\n#### Tools Used\n- Go programming language.\n- JSON (JavaScript Object Notation) for lightweight data interchange.\n\n#### Summary\nToday was a productive day focused on learning and implementing new technologies. I built a journal MCP server using the Go programming language, which involved understanding and utilizing MCP, a new technology that serves as a bridge between tools and GPT. MCP was highlighted as an important component in AI. Additionally, I used JSON for its lightweight and efficient data handling capabilities. This experience has deepened my understanding of both MCP and Go, setting a strong foundation for future projects in AI and software development.",
+      "created_at": "2026-03-24 11:52"
+    },
+    {
+      "id": 14,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n---\n\n#### Work Done\n- Built a journal MCP server in Go.\n\n#### Concepts Learned\n- MCP (Message Control Protocol) is a bridge between tools and GPT (Generative Pre-trained Transformer).\n- MCP is considered important in AI.\n- MCP is a new technology introduced recently.\n- JSON (JavaScript Object Notation) is lightweight and was used today.\n\n#### Tools Used\n- Go programming language.\n- JSON for data interchange.\n\n#### Summary\nToday, I focused on building a journal MCP server using the Go programming language. I learned about MCP, its significance as a bridge between tools and GPT, and its importance in the field of AI. Additionally, I utilized JSON due to its lightweight nature for data handling. This experience has been valuable in understanding both new technologies and efficient data formats.",
+      "created_at": "2026-03-24 11:54"
+    },
+    {
+      "id": 17,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n#### Work Done\n- Built a journal MCP server in Go.\n- Fixed a bug in the API.\n\n#### Concepts Learned\n- MCP (Message Control Protocol) and its role as a bridge between tools and GPT.\n- The importance of MCP in AI.\n- Basic concepts of Python.\n- The lightweight nature of JSON.\n\n#### Tools Used\n- Go programming language.\n- Python.\n- JSON.\n\n#### Summary\nToday was a productive day focused on both development and learning. I built a journal MCP server using Go, which involved understanding and implementing MCP, a new technology that serves as a bridge between tools and GPT. This experience highlighted the importance of MCP in AI. Additionally, I fixed a bug in the API, demonstrating practical problem-solving skills. On the learning front, I delved into Python basics and explored JSON, appreciating its lightweight structure. Overall, it was a day of significant technical progress and conceptual understanding.",
+      "created_at": "2026-03-24 12:14"
+    },
+    {
+      "id": 20,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n---\n\n#### Work Done\n- Built a journal MCP server in Go.\n- Fixed a bug in the API.\n\n#### Concepts Learned\n- MCP (Message Control Protocol) is a bridge between tools and GPT (Generative Pre-trained Transformer).\n- MCP is important in AI and is a new technology introduced.\n- Basic concepts of Go programming language.\n- Basic concepts of Python programming language.\n- JSON is lightweight and used for data interchange.\n\n#### Tools Used\n- Go\n- Python\n- JSON\n\n#### Summary\nToday was a productive day with a mix of coding and learning new concepts. I successfully built a journal MCP server using Go, which involved understanding and implementing MCP, a crucial technology in AI that acts as a bridge between tools and GPT. Additionally, I fixed a bug in the API, demonstrating my problem-solving skills. On the learning front, I delved into the basics of both Go and Python programming languages. I also utilized JSON for its lightweight data interchange capabilities. Overall, it was a day filled with hands-on experience and theoretical knowledge acquisition.",
+      "created_at": "2026-03-24 17:08"
+    },
+    {
+      "id": 22,
+      "date": "2026-03-24",
+      "summary": "### Daily Learning Report\n\n**Date:** 24 March 2026\n\n#### Work Done\n- Built a journal MCP server in Go.\n- Fixed a bug in the API.\n\n#### Concepts Learned\n- MCP (Message Control Protocol) is a bridge between tools and GPT.\n- MCP is important in AI and is a new technology introduced.\n- Basics of Python.\n- JSON is lightweight and used for data interchange.\n\n#### Tools Used\n- Go (Programming Language)\n- Python\n\n#### Summary\nToday was a productive day with a mix of development and learning. I built a journal MCP server using Go, which involved understanding and implementing MCP, a new technology that serves as a bridge between tools and GPT. This experience highlighted the importance of MCP in AI. Additionally, I fixed a bug in the API, ensuring smoother functionality. On the learning front, I delved into the basics of Python and utilized JSON for its lightweight data interchange capabilities. Overall, it was a day of both practical application and theoretical understanding.",
+      "created_at": "2026-03-24 17:09"
+    }
+  ],
+  "next_id": 23
+}

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Journal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #070711;
+    --card: #0e0e1c;
+    --card2: #131320;
+    --accent: #6d28d9;
+    --accent2: #0ea5e9;
+    --green: #22c55e;
+    --red: #ef4444;
+    --text: #f0f0f0;
+    --muted: #555;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #6d28d9, #0ea5e9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-item {
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-item:hover { background: var(--card2); color: var(--text); }
+  .nav-item.active { background: rgba(109,40,217,0.2); color: #a78bfa; border: 1px solid rgba(109,40,217,0.3); }
+
+  .sidebar-bottom {
+    margin-top: auto;
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    display: inline-block;
+    margin-right: 6px;
+    animation: blink 2s infinite;
+  }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* MAIN */
+  .main { padding: 40px; overflow-y: auto; }
+  .page { display: none; }
+  .page.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+  .page-header { margin-bottom: 30px; }
+  .page-header h2 { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+  .page-header p { color: var(--muted); font-size: 12px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+
+  .card-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+
+  /* INPUTS */
+  input, textarea {
+    width: 100%;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 12px;
+  }
+
+  input:focus, textarea:focus { border-color: var(--accent); }
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+  textarea { resize: none; height: 100px; }
+
+  /* BUTTONS */
+  .btn { padding: 12px 20px; border-radius: 10px; border: none; font-family: 'DM Mono', monospace; font-size: 13px; cursor: pointer; transition: all 0.2s ease; font-weight: 500; }
+
+  .btn-primary { background: linear-gradient(135deg, var(--accent), #7c3aed); color: white; width: 100%; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(109,40,217,0.4); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-success { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.25); width: 100%; }
+  .btn-success:hover:not(:disabled) { background: rgba(34,197,94,0.25); transform: translateY(-2px); }
+  .btn-success:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* NOTE ITEMS */
+  .note-item {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .note-text { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+  .note-time { font-size: 11px; color: var(--muted); }
+
+  /* REPORT ITEMS */
+  .report-item {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .report-date { font-size: 11px; color: var(--accent2); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .report-content { font-size: 13px; color: #ccc; line-height: 1.8; white-space: pre-wrap; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; text-align: center; }
+  .stat-number { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; background: linear-gradient(135deg, #6d28d9, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* GENERATE BOX */
+  .generate-box {
+    background: linear-gradient(135deg, rgba(109,40,217,0.1), rgba(14,165,233,0.08));
+    border: 1px solid rgba(109,40,217,0.2);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .generate-box h3 { font-family: 'Syne', sans-serif; font-size: 18px; margin-bottom: 8px; }
+  .generate-box p { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
+
+  /* EMPTY */
+  .empty { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; }
+  .empty div { font-size: 36px; margin-bottom: 12px; }
+
+  /* LOADING SPINNER */
+  .loading { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.2); border-top-color: white; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 30px; right: 30px; padding: 14px 20px; border-radius: 12px; font-size: 13px; z-index: 999; transform: translateY(80px); opacity: 0; transition: all 0.3s ease; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: var(--green); }
+  .toast.error { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: var(--red); }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="logo">📔 DevJournal</div>
+    <div class="nav-item active" onclick="showPage('dashboard', this)">📊 Dashboard</div>
+    <div class="nav-item" onclick="showPage('notes', this)">📝 Notes</div>
+    <div class="nav-item" onclick="showPage('reports', this)">📋 Reports</div>
+    <div class="nav-item" onclick="showPage('generate', this)">✨ Generate Report</div>
+    <div class="sidebar-bottom">
+      <span class="status-dot"></span>Server: localhost:8082
+    </div>
+  </div>
+
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h2>Dashboard</h2>
+        <p>Your daily coding journal overview</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-number" id="totalNotes">0</div><div class="stat-label">Total Notes</div></div>
+        <div class="stat-card"><div class="stat-number" id="totalReports">0</div><div class="stat-label">Reports Generated</div></div>
+        <div class="stat-card"><div class="stat-number" id="todayNotes">0</div><div class="stat-label">Notes Today</div></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Quick Note</div>
+        <input type="text" id="quickNote" placeholder="Type a quick note and press Enter..." />
+        <button class="btn btn-primary" onclick="saveNote()">＋ Save Note</button>
+      </div>
+      <div class="card">
+        <div class="card-label">Recent Notes</div>
+        <div id="recentNotes"><div class="empty"><div>📝</div>No notes yet</div></div>
+      </div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="page" id="page-notes">
+      <div class="page-header">
+        <h2>All Notes</h2>
+        <p>Everything you noted while coding</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Add New Note</div>
+        <textarea id="newNoteText" placeholder="What did you learn or do today?"></textarea>
+        <button class="btn btn-primary" onclick="saveNoteFromTextarea()">＋ Save Note</button>
+      </div>
+      <div class="card">
+        <div class="card-label">All Notes</div>
+        <div id="allNotes"><div class="empty"><div>📝</div>No notes saved yet</div></div>
+      </div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="page" id="page-reports">
+      <div class="page-header">
+        <h2>Daily Reports</h2>
+        <p>Your AI-generated learning reports</p>
+      </div>
+      <div id="allReports"><div class="empty"><div>📋</div>No reports yet. Generate one!</div></div>
+    </div>
+
+    <!-- GENERATE -->
+    <div class="page" id="page-generate">
+      <div class="page-header">
+        <h2>Generate Report</h2>
+        <p>AI reads your notes and generates a daily report</p>
+      </div>
+      <div class="generate-box">
+        <h3>✨ AI Report Generator</h3>
+        <p>Click below — AI reads all your notes and writes a professional daily learning report. The report is auto-saved.</p>
+        <button class="btn btn-success" onclick="generateReport()" id="generateBtn">
+          ✨ Generate My Daily Report
+        </button>
+      </div>
+      <div id="generatedReport" style="display:none">
+        <div class="card">
+          <div class="card-label">Generated Report</div>
+          <div id="reportContent" class="report-content"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API = 'http://localhost:8082/tool';
+
+  async function callServer(payload) {
+    const resp = await fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    return resp.json();
+  }
+
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.className = 'toast', 3000);
+  }
+
+  function showPage(name, el) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    el.classList.add('active');
+    if (name === 'notes') loadAllNotes();
+    if (name === 'reports') loadReports();
+    if (name === 'dashboard') loadDashboard();
+  }
+
+  async function saveNote() {
+    const input = document.getElementById('quickNote');
+    const text = input.value.trim();
+    if (!text) { showToast('Please enter a note!', 'error'); return; }
+    try {
+      const result = await callServer({ tool: 'save_note', text });
+      if (result.error) { showToast(result.error, 'error'); return; }
+      showToast('✅ Note saved!');
+      input.value = '';
+      loadDashboard();
+    } catch { showToast('❌ Cannot reach server!', 'error'); }
+  }
+
+  async function saveNoteFromTextarea() {
+    const input = document.getElementById('newNoteText');
+    const text = input.value.trim();
+    if (!text) { showToast('Please enter a note!', 'error'); return; }
+    try {
+      const result = await callServer({ tool: 'save_note', text });
+      if (result.error) { showToast(result.error, 'error'); return; }
+      showToast('✅ Note saved!');
+      input.value = '';
+      loadAllNotes();
+    } catch { showToast('❌ Cannot reach server!', 'error'); }
+  }
+
+  function parseNotes(raw) {
+    const notes = [];
+    raw.split('\n').forEach(line => {
+      const m = line.match(/\[#(\d+)\]\s(.+)\|\ssaved:\s(.+)/);
+      if (m) notes.push({ id: m[1], text: m[2].trim(), time: m[3].trim() });
+    });
+    return notes;
+  }
+
+  function renderNote(n) {
+    return `<div class="note-item">
+      <div class="note-text">${n.text}</div>
+      <div class="note-time">${n.time}</div>
+    </div>`;
+  }
+
+  async function loadDashboard() {
+    try {
+      const [noteRes, reportRes] = await Promise.all([
+        callServer({ tool: 'list_notes' }),
+        callServer({ tool: 'list_reports' })
+      ]);
+
+      if (!noteRes.result || noteRes.result === 'No notes saved yet!') {
+        document.getElementById('totalNotes').textContent = '0';
+        document.getElementById('todayNotes').textContent = '0';
+        document.getElementById('recentNotes').innerHTML = '<div class="empty"><div>📝</div>No notes yet</div>';
+      } else {
+        const notes = parseNotes(noteRes.result);
+        document.getElementById('totalNotes').textContent = notes.length;
+        const today = new Date().toISOString().slice(0, 10);
+        document.getElementById('todayNotes').textContent = notes.filter(n => n.time.startsWith(today)).length;
+        const recent = notes.slice(-3).reverse();
+        document.getElementById('recentNotes').innerHTML = recent.map(renderNote).join('');
+      }
+
+      if (!reportRes.result || reportRes.result === 'No reports saved yet!') {
+        document.getElementById('totalReports').textContent = '0';
+      } else {
+        document.getElementById('totalReports').textContent = (reportRes.result.match(/\[#\d+\]/g) || []).length;
+      }
+    } catch { showToast('❌ Cannot reach server!', 'error'); }
+  }
+
+  async function loadAllNotes() {
+    try {
+      const result = await callServer({ tool: 'list_notes' });
+      const container = document.getElementById('allNotes');
+      if (!result.result || result.result === 'No notes saved yet!') {
+        container.innerHTML = '<div class="empty"><div>📝</div>No notes saved yet</div>';
+        return;
+      }
+      container.innerHTML = parseNotes(result.result).reverse().map(renderNote).join('');
+    } catch { showToast('❌ Cannot reach server!', 'error'); }
+  }
+
+  async function loadReports() {
+    try {
+      const result = await callServer({ tool: 'list_reports' });
+      const container = document.getElementById('allReports');
+      if (!result.result || result.result === 'No reports saved yet!') {
+        container.innerHTML = '<div class="empty"><div>📋</div>No reports yet. Generate one!</div>';
+        return;
+      }
+      const parts = result.result.split(/\[#\d+\]/).filter(p => p.trim());
+      container.innerHTML = parts.map(p => {
+        const lines = p.trim().split('\n');
+        const date = lines[0]?.replace('Date:', '').trim();
+        const content = lines.slice(1).join('\n').trim();
+        return `<div class="report-item">
+          <div class="report-date">📅 ${date}</div>
+          <div class="report-content">${content}</div>
+        </div>`;
+      }).join('');
+    } catch { showToast('❌ Cannot reach server!', 'error'); }
+  }
+
+  async function generateReport() {
+    const btn = document.getElementById('generateBtn');
+    btn.innerHTML = '<span class="loading"></span>Generating...';
+    btn.disabled = true;
+
+    try {
+      // FIX: AI call happens on the backend — no API key in browser
+      const result = await callServer({ tool: 'generate_report' });
+
+      if (result.error) {
+        showToast('❌ ' + result.error, 'error');
+        return;
+      }
+
+      document.getElementById('reportContent').textContent = result.result;
+      document.getElementById('generatedReport').style.display = 'block';
+      showToast('✅ Report generated and saved!');
+    } catch {
+      showToast('❌ Error generating report!', 'error');
+    } finally {
+      btn.innerHTML = '✨ Generate My Daily Report';
+      btn.disabled = false;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadDashboard();
+    document.getElementById('quickNote').addEventListener('keypress', e => {
+      if (e.key === 'Enter') saveNote();
+    });
+  });
+</script>
+</body>
+</html>
